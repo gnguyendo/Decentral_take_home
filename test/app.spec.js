@@ -16,7 +16,7 @@ describe("compare", function() {
         expect(result).to.be.equal(true);
     });
 
-    it("should validate two matching objects with keys out of orde  r", function() {
+    it("should validate two matching objects with keys out of order", function() {
         const data = {"merges": [], "name": "sheet2","styles": [],"rows": {},"validations": [],"freeze": "A1"};
         const result = compare(data, target);
         expect(result).to.be.equal(true);
@@ -91,6 +91,12 @@ describe("compare", function() {
     it ("should validate typed array to object", function() {
         const buffer = new ArrayBuffer(16);
         const data = new Int32Array(buffer);
+        const result = compare(data, target);
+        expect(result).to.be.equal(false);
+    });
+
+    it ("should validate error object to object", function() {
+        const data = Error();
         const result = compare(data, target);
         expect(result).to.be.equal(false);
     });
